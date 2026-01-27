@@ -1,5 +1,21 @@
 # <img src="https://github.com/user-attachments/assets/4f01ef6e-3c1e-4201-83db-fac4b383a3b0" alt="durin" width="33%">
 
+## Key Contracts and Addresses
+
+### L2 Registry
+
+- **Contract:** [0x58f23036463463f947aeadab97eeecf5a76049c7 (BaseScan)](https://basescan.org/address/0x58f23036463463f947aeadab97eeecf5a76049c7)
+- **Description:** The L2 registry tracks ownership of ENS subdomains. These names are represented as ERC-721 NFTs. Durin's implementation of the registry stores text records, cointypes, and contenthash that can be associated with a subdomain.
+
+### L2 Registrar for ethcali.eth on Base
+
+- **Contract:** [0x7103595fc32b4072b775e9f6b438921c8cf532ed (BaseScan)](https://basescan.org/address/0x7103595fc32b4072b775e9f6b438921c8cf532ed#code)
+- **Description:** The registrar controls how names are minted. Users can only register a subdomain through the registrar by calling `register()`. The registrar is where minting logic—such as pricing models, renewal mechanisms, and expiration dates—should be implemented. We provide an example on GitHub.
+
+### L1 Resolver
+
+- **Contract:** [0x8A968aB9eb8C084FBC44c531058Fc9ef945c3D61 (Etherscan)](https://etherscan.io/address/0x8A968aB9eb8C084FBC44c531058Fc9ef945c3D61)
+- **Description:** The L1 Resolver functions as an entry point to provide information about a name. Users can query name resolution (e.g., bob.example.eth → 0x542) and associated text records. The provided resolver is made to work with Durin's contracts. As the owner of the ENS name, you are able to revert any of these changes.
 Durin is an opinionated approach to ENS L2 subnames. Durin consists of:
 
 1. Registry factory on [supported chains](#active-registry-factory-deployments)
