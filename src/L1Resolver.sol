@@ -77,6 +77,7 @@ contract L1Resolver is IExtendedResolver, Ownable {
     );
     event GatewayChanged(string url);
     event SignerChanged(address signer);
+    event L2RegistryCleared(bytes32 node);
 
     /*//////////////////////////////////////////////////////////////
                                  ERRORS
@@ -200,6 +201,22 @@ contract L1Resolver is IExtendedResolver, Ownable {
             interfaceID == type(IExtendedResolver).interfaceId ||
             interfaceID == 0x01ffc9a7; // ERC-165 interface
     }
+
+    function clearL2Registry(bytes32 node) external {
+    address owner = ens.owner(node);
+
+    if (owner == address(nameWrapper)) {
+        owner = nameWrapper.ownerOf(uint256(node));
+    }
+
+    if (owner != msg.sender) {
+        revert Unauthorized();
+    }
+
+    delete l2Registry[node];
+    emit L2RegistryCleared(node);
+}
+
 
     /*//////////////////////////////////////////////////////////////
                             ADMIN FUNCTIONS
